@@ -117,11 +117,11 @@ function jogo() {
 		voltar = new Config(game, "voltar", 40, 40, 0.2)
 		voltar.events.onInputDown.add(voltarFoiClicado);
 		
-		som = new Config(game, "som", 530, 860, 0.4);
+		som = new Config(game, "som", 520, 840, 0.4);
 		som.events.onInputDown.add(switchSom);
 		som.visible = preferencia_Som;
 	    
-	    nosom = new Config(game, "nosom", 530, 860, 0.4);
+	    nosom = new Config(game, "nosom", 520, 840, 0.4);
 	    nosom.events.onInputDown.add(switchSom);
 	    nosom.visible = !preferencia_Som;
 	    
@@ -129,9 +129,15 @@ function jogo() {
 		fundo_recorde.scale.x = 0.5;
 		fundo_recorde.scale.y = 0.5;
 		
-		fundo_pontos = game.add.image(0,800,"fundo_pontos");
+		fundo_pontos = game.add.image(-20,800,"fundo_pontos");
 		fundo_pontos.scale.x = 0.5;
 		fundo_pontos.scale.y = 0.5;
+		
+		pontos = 0;
+		pontoText = game.add.text(75, 860, pontos, { font: "normal 33px 'Press Start 2P'", fill: '#000' });
+		pontoText.setText("RODADA  "+ pontos);
+		recordeText = game.add.text(265, 70, pontos, { font: "normal 33px 'Press Start 2P'", fill: '#000' });
+		recordeText.setText("RECORDE  " + recorde);
 		
 		squir_square = new Square(game, 'squir_square', 340, 200);
 		bulba_square = new Square(game, "bulba_square", 40, 200);
@@ -157,12 +163,6 @@ function jogo() {
 			}
 		)
 		
-		pontos = 0;
-		pontoText = game.add.text(95, 860, pontos, { font: "normal 33px 'Press Start 2P'", fill: '#000' });
-		pontoText.setText("RODADA  "+ pontos);
-		recordeText = game.add.text(265, 70, pontos, { font: "normal 33px 'Press Start 2P'", fill: '#000' });
-		recordeText.setText("RECORDE  " + recorde);
-		
 		podeClicar = false;
 		geraQuadrado();
 	    setTimeout(function(){
@@ -170,17 +170,15 @@ function jogo() {
 	    	podeClicar = true;
 	    	}, 2000);
 		
+		restart();
+		checkSomPref();
 		fadeIn();
-
-		if (preferencia_Som) {
-    		somFundo.play();
-		}
 		
 	};
 	
 	this.update = function () {
 		if(podeClicar && pokeSez) {
-			if(game.time.now - timeCheck > 700 - N*40){
+			if(game.time.now - timeCheck > 1000 - N*40){
 				pokeQuadrado[0].alpha = 0.7;
 				pokeQuadrado[0].stop();
 				pokeQuadrado[1].alpha = 0.3;
@@ -189,15 +187,14 @@ function jogo() {
 	            {
 	                if (currentCount < N)
 	                {
-	                    podeClicar = true;
 	                    simonSequence();
 	                }
 	                else
 	                {
 	                    pokeSez = false;
-	                    podeClicar = true;
 	                }
-	            }, 1000 - N * 20);
+	    			podeClicar = true;
+	            }, 400 - N * 20);
 			}
 		}
 	}
@@ -222,7 +219,7 @@ function jogo() {
                 userCount = 0;
                 currentCount = 0;
                 N++;
-                console.log("N: " + N);
+                console.log("Sequencia: " + N);
                 pokeSez = true;
 	    	}
 	    }
@@ -268,7 +265,7 @@ function jogo() {
 	function select(item, pointer) {
 		if(podeClicar && !pokeSez){
 			var index = item.index;
-			console.log("Pokemon Selecionado: " + index);
+			item.checkSelectedFirst = true;
 			pokemons[index].move();
 			pokemons[index].alpha = 1;
 			squares[index].alpha = 0.75;
@@ -277,11 +274,18 @@ function jogo() {
 	
 	function release(item, pointer) {
 		if(podeClicar && !pokeSez){
-			var pokemon = pokemons[item.index];
-			pokemon.alpha = 0.7;
-			pokemon.stop();
-			squares[item.index].alpha = 0.3;
-			playerSequence(item);	
+			if(item.checkSelectedFirst){
+				var index = item.index;
+				var pokemon = pokemons[index];
+				console.log("Pokemon Selecionado: " + index);
+				
+				pokemon.alpha = 0.7;
+				pokemon.stop();
+				squares[item.index].alpha = 0.3;
+				playerSequence(item);
+
+				item.checkSelectedFirst = false;
+			}	
 		}
 	};
 	
@@ -300,18 +304,32 @@ function jogo() {
         item.events.onInputOut.add(moveOff);
 	};
 
-	function switchSom (){
-		if (preferencia_Som){
-    		somFundo.stop();
-			som.visible = false;
+	function switchSom(){
+		preferencia_Som = !preferencia_Som;
+		checkSomPref();
+	};
+	
+	function checkSomPref(){
+		if(!preferencia_Som){
+    		somFundo.stop(); 		
+    		somSquir.volume = 0.0;
+			somPika.volume = 0.0;
+			somBulba.volume = 0.0;
+			somCharm.volume = 0.0;
+			
+ 			som.visible = false;
     		nosom.visible = true;
 		} else {
     		somFundo.play();
+    		somSquir.volume = 0.2;
+			somPika.volume = 0.2;
+			somBulba.volume = 0.2;
+			somCharm.volume = 0.2;
+			
 			som.visible = true;
     		nosom.visible = false;
 		}
-		preferencia_Som = !preferencia_Som;
-	};
+	}
 
 	function voltarFoiClicado() {
 		fadeOut(fadeOutVoltarAcabou);

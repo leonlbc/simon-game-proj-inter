@@ -33,23 +33,25 @@ function menu() {
 	    somFundo.loop = true;
 	    
 	    game.add.image(0,0,"fundo");
-	    game.add.tileSprite(-180,0,1000,350,"logo");
+	    logo = game.add.tileSprite(-80,50,1000,350,"logo");
+	    logo.scale.x=0.8;
+	    logo.scale.y=0.8;
 	    
-	    jogar = game.add.image(114,435,"jogar");
+	    jogar = game.add.image(134,435,"jogar");
 	    jogar.scale.x=0.5;
 	    jogar.scale.y=0.5;
 		jogar.inputEnabled = true;
 		jogar.input.useHandCursor = true;
 		jogar.events.onInputDown.add(jogarFoiClicado);
 	    
-	    credito=game.add.image(114,535,"credito");
+	    credito=game.add.image(134,535,"credito");
 	    credito.scale.x= 0.5;
 	    credito.scale.y= 0.5;
 		credito.inputEnabled = true;
 		credito.input.useHandCursor = true;
 		credito.events.onInputDown.add(creditosFoiClicado);
 	    
-	    som=game.add.image(530,860,"som");
+	    som=game.add.image(520,840,"som");
 	    som.scale.x= 0.4;
 	    som.scale.y= 0.4;
 	    som.inputEnabled = true;
@@ -57,7 +59,7 @@ function menu() {
 		som.events.onInputDown.add(switchSom);
 		som.visible = preferencia_Som;
 	    
-	    nosom=game.add.image(530,860,"nosom");
+	    nosom=game.add.image(520,840,"nosom");
         nosom.scale.x= 0.4;
 	    nosom.scale.y= 0.4;
         nosom.inputEnabled = true;
@@ -66,20 +68,24 @@ function menu() {
 	    nosom.visible = !preferencia_Som;
 	    
 	    //jogar
-	    pokebola= game.add.sprite(69,439,"pokebola");
+	    pokebola= game.add.sprite(89,439,"pokebola");
 	    pokebola.animations.add("bola",[0,1,2],4,true);
 	    pokebola.animations.play("bola");
 	    
 	    //creditos
-	    pokebola= game.add.sprite(69,539,"pokebola");
+	    pokebola= game.add.sprite(89,539,"pokebola");
 	    pokebola.animations.add("bola",[0,1,2],4,true);
 	    pokebola.animations.play("bola");
     	
     	fadeIn();
 
+		
 		if (preferencia_Som) {
-    		somFundo.play();
+	    	setTimeout(function(){
+		    	somFundo.play();
+		    	}, 600);	
 		}
+		
 	};
 	
 	function jogarFoiClicado() {
