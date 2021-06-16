@@ -9,15 +9,19 @@
 
 	<title>Game</title>
 
+	<link rel="preconnect" href="https://fonts.gstatic.com" />
+	<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
+
 	<style type="text/css">
 		html {
+			font-family: 'Press Start 2P';
 			height: 100%;
 			min-height: 100%;
 			max-height: 100%;
 		}
 
 		body, input, textarea, select {
-			font: normal 30px sans-serif;
+			font: normal 30px 'Press Start 2P', sans-serif;
 		}
 
 		body {
@@ -51,9 +55,21 @@
 		canvas {
 			margin: 0 auto;
 		}
+		
+		#font {
+			z-index: -1;
+			position: absolute;
+			left: 0;
+			top: 0;
+			width: 0;
+			height: 0;
+			overflow: hidden;
+			pointer-events: none;
+		}
 	</style>
 </head>
 <body>
+<div id="font">abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!@</div>
 
 	<div id="divParent"><div id="divGame"></div></div>
 

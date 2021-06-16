@@ -1,4 +1,4 @@
-﻿Poke = function (game, image, x, y, movimento) {
+﻿Poke = function (game, image, x, y, movimento, som) {
 
     Phaser.Sprite.call(this, game, x, y, image);
 	this.animations.add(movimento, [0, 1, 2, 3, 4, 5, 6, 7, 8, 9], 10, true);
@@ -10,10 +10,12 @@
     
 	this.move = function(){
 		this.animations.play(movimento);
+		som.play();
 	}
 	
 	this.stop = function(){
 		this.animations.stop();
+		som.stop();
 	}
 	
 	game.add.existing(this)
@@ -96,11 +98,20 @@ function jogo() {
 		game.load.spritesheet("pika01", "025Pikachu.png", 66.5, 63);
 		
 		game.load.audio("somFundo", "MM.mp3");
+		game.load.audio("pikachu", "pikachu.mp3");
+		game.load.audio("bulbasaur", "bulbasaur.mp3");
+		game.load.audio("charmander", "charmander.mp3");
+		game.load.audio("squirtle", "squirtle.mp3");
 	};
 	
 	this.create = function () {
-	    somFundo = game.add.audio("somFundo", 1);
+	    somFundo = game.add.audio("somFundo", 0.2);
 	    somFundo.loop = true;
+	    
+		somSquir = game.add.audio("squirtle", 0.2);
+		somPika = game.add.audio("pikachu", 0.2);
+		somBulba = game.add.audio("bulbasaur", 0.2);
+		somCharm = game.add.audio("charmander", 0.2);
 
 		game.add.image(0,0,"tela");
 		voltar = new Config(game, "voltar", 40, 40, 0.2)
@@ -127,10 +138,10 @@ function jogo() {
 		charm_square = new Square(game, "charm_square", 40, 480);
 		pika_square = new Square(game, "pika_square", 340, 480);
 			
-		bulba01 = new Poke(game, 'bulba01', 105, 270, 'movimentob01');
-		charm01 = new Poke(game, 'charm01', 105, 520, 'movimentoc01');
-		squir01 = new Poke(game, 'squir01', 400, 270, 'movimentos01');
-		pika01 = new Poke(game, 'pika01', 390, 500, 'movimento_p01');
+		bulba01 = new Poke(game, 'bulba01', 105, 270, 'movimentob01', somBulba);
+		charm01 = new Poke(game, 'charm01', 105, 520, 'movimentoc01', somCharm);
+		squir01 = new Poke(game, 'squir01', 400, 270, 'movimentos01', somSquir);
+		pika01 = new Poke(game, 'pika01', 390, 500, 'movimento_p01', somPika);
 		
 		pokemons = [bulba01, squir01,
 					charm01, pika01];
@@ -147,10 +158,10 @@ function jogo() {
 		)
 		
 		pontos = 0;
-		pontoText = game.add.text(100, 856, pontos, { font: "normal 33px 'Press Start 2P'", fill: '#000' });
-		pontoText.setText("RODADA                "+ pontos);
-		recordeText = game.add.text(270, 65, pontos, { font: "normal 33px 'Press Start 2P'", fill: '#000' });
-		recordeText.setText("RECORDE                " + recorde);
+		pontoText = game.add.text(95, 860, pontos, { font: "normal 33px 'Press Start 2P'", fill: '#000' });
+		pontoText.setText("RODADA  "+ pontos);
+		recordeText = game.add.text(265, 70, pontos, { font: "normal 33px 'Press Start 2P'", fill: '#000' });
+		recordeText.setText("RECORDE  " + recorde);
 		
 		podeClicar = false;
 		geraQuadrado();
@@ -194,9 +205,9 @@ function jogo() {
 	this.render = function() {
 		if(pontos > recorde){
 			recorde = pontos;
-			recordeText.setText("RECORDE                " + recorde)
+			recordeText.setText("RECORDE  " + recorde)
 		}
-		pontoText.setText("RODADA                "+ pontos);
+		pontoText.setText("RODADA  "+ pontos);
 	};
 	
 	function playerSequence(selected) {

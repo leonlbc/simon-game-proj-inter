@@ -29,7 +29,7 @@ function menu() {
 	
 	this.create = function () {
 	    
-	    somFundo = game.add.audio("somFundo", 1);
+	    somFundo = game.add.audio("somFundo", 0.3);
 	    somFundo.loop = true;
 	    
 	    game.add.image(0,0,"fundo");
