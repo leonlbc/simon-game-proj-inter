@@ -76,12 +76,11 @@ function menu() {
 	    pokebola.animations.play("bola");
     	
     	fadeIn();
-
-		if (preferencia_Som) {
+	if (preferencia_Som) {
 	    	setTimeout(function(){
 		    	somFundo.play();
-		    	}, 600);	
-		}
+		    	}, 1000);	
+		}	
 	};
 	
 	function jogarFoiClicado() {
