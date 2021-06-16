@@ -60,7 +60,7 @@ function menu() {
 		som.visible = preferencia_Som;
 	    
 	    nosom=game.add.image(520,840,"nosom");
-        nosom.scale.x= 0.4;
+	nosom.scale.x= 0.4;
 	    nosom.scale.y= 0.4;
         nosom.inputEnabled = true;
 	    nosom.input.useHandCursor = true;
