@@ -78,7 +78,9 @@ function menu() {
     	fadeIn();
 
 		if (preferencia_Som) {
-    		somFundo.play();
+	    	setTimeout(function(){
+		    	somFundo.play();
+		    	}, 600);	
 		}
 	};
 	
