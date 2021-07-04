@@ -1,3 +1,2 @@
-# PokeMemoryESPM
-
-Jogo feito por alunos da ESPM Tech no 1o semestre
+# inter-1sem-2021-pokememory2
+Pokememory 2
