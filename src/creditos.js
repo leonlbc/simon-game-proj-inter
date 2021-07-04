@@ -3,9 +3,9 @@
 	var integ;
 	
 	this.preload = function () {
-		game.load.image("fundo", "Background.png");
-        game.load.image("voltar", "BackNovo.png");	
-	    game.load.image("integrantes", "integrantes.png");
+		game.load.image("fundo", "assets/Background.png");
+        game.load.image("voltar", "assets/BackNovo.png");	
+	    game.load.image("integrantes", "assets/integrantes.png");
 	};
 	
 	this.create = function () {

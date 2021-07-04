@@ -16,14 +16,14 @@ function menu() {
 	
 	this.preload = function () {
 		
-		game.load.image("fundo", "Background.png");
-		game.load.image("logo","LOGO.png");
-		game.load.image("jogar", "Jogar.png");
-		game.load.image("credito", "Creditos.png");
-		game.load.spritesheet("pokebola", "Pokeball.png",82,83);
-		game.load.image("som","Sound.png");
-		game.load.image("nosom","NoSound.png");
-		game.load.audio("somFundo", "MM.mp3");
+		game.load.image("fundo", "assets/Background.png");
+		game.load.image("logo","assets/LOGO.png");
+		game.load.image("jogar", "assets/Jogar.png");
+		game.load.image("credito", "assets/Creditos.png");
+		game.load.spritesheet("pokebola", "assets/Pokeball.png",82,83);
+		game.load.image("som","assets/Sound.png");
+		game.load.image("nosom","assets/NoSound.png");
+		game.load.audio("somFundo", "assets/MM.mp3");
 		
 	};
 	

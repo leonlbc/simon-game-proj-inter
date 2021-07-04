@@ -2,9 +2,9 @@
 	var play_again;
 	
 	this.preload = function () {
-		game.load.image("fundo", "game_over.png"); //Fundo
-		game.load.image("fundo_pontos", "Visor.png"); //Fundo Pontuacao
-		game.load.image("play_again", "play_again.png"); //Botao Jogar Denovo
+		game.load.image("fundo", "assets/game_over.png"); //Fundo
+		game.load.image("fundo_pontos", "assets/Visor.png"); //Fundo Pontuacao
+		game.load.image("play_again", "assets/play_again.png"); //Botao Jogar Denovo
 	};
 	
 	this.create = function () {
