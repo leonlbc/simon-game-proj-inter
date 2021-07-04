@@ -1,2 +1,2 @@
-# Leon Cohen
-Pokememory - Simon game with pokemons
+# PokeMemory
+PokeMemory - Simon game with pokemons
