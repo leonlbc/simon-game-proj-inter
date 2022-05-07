@@ -1,2 +1,2 @@
-# PokeMemory
-PokeMemory - Simon game with pokemons
+# PKMemory
+PKMemory - Simon game
